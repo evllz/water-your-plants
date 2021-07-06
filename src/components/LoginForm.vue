@@ -1,39 +1,18 @@
 <template>
   <div class="hello">
-    
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
     <w-card shadow class="card">
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+      <w-input v-model="username" class="mb5" inner-icon-left="mdi mdi-account" label="Username"/>
+      <w-input v-model="password" :type="isPassword ? 'password' : 'text'"
+                :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+                @click:inner-icon-left="isPassword = !isPassword" class="mb5" label="Password"/>
     </w-card>
+    <w-button @click="testLog" class="ma1" bg-color="primary" round>Console log</w-button>
+    <w-button @click="login" class="ma1" bg-color="primary" round>Login</w-button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'LoginForm',
   props: {
@@ -43,8 +22,22 @@ export default {
     return({
       username:'',
       password:'',
+      isPassword: true
     })
-  }
+  },methods: {testLog(){
+    console.log(this.username, " ", this.password)
+  }, login(){
+    let credentials = {username:this.username,password:this.password}
+    axios.post('https://dont-let-it-die.herokuapp.com/auth/login',credentials)
+    .then(res => {
+      localStorage.setItem('token',res.data.token)
+      this.username = ''
+      this.password = ''
+      this.$router.push('/dashboard')
+    }).catch(err => {
+      console.error(err)
+    })
+  }}
 }
 </script>
 

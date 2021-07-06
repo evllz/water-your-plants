@@ -1,12 +1,25 @@
 <template>
 <w-app>
   <div id="nav">
-    <router-link to="/">Login</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home </router-link> 
+    <router-link to="/about">| About</router-link>
+    <router-link v-if="token" to="/dashboard">| Dashboard</router-link>
+
   </div>
   <router-view/>
 </w-app>
 </template>
+<script>
+export default{
+  methods:{
+  create(){
+    let token = localStorage.getItem('token')
+  }
+}
+}
+
+
+</script>
 
 <style>
 #app {
