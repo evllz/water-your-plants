@@ -24,9 +24,10 @@ export default {
       password:'',
       isPassword: true
     })
-  },methods: {testLog(){
+  },methods: {
+    testLog: function(){
     console.log(this.username, " ", this.password)
-  }, login(){
+  }, login: function(){
     let credentials = {username:this.username,password:this.password}
     axios.post('https://dont-let-it-die.herokuapp.com/auth/login',credentials)
     .then(res => {

@@ -6,11 +6,24 @@
 <script>
 export default {
     name: 'Dashboard',
-    methods: {logout(){
+    methods: {
+        logout: function(){
         localStorage.removeItem('token')
         this.$router.push('/')
+        }, 
+    },
+    created(){
+        console.log('created')
+    },
+    beforeRouteEnter(routeTo, routeFrom, next){
+        let token = localStorage.getItem('token')
+        if(!token){
+            next("/")
+        }else{
+            next()
+        }
     }
-    }
+    
 
 }
 </script>
