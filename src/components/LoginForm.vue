@@ -1,13 +1,19 @@
 <template>
-  <div class="hello">
+  <img src="../assets/plantgroup.png"/>
+  <div class="container">
+  <div class="title">
+    <typography class="headline">water your plants</typography>
+  </div>
+  <div>
     <w-card shadow class="card">
       <w-input v-model="username" class="mb5" inner-icon-left="mdi mdi-account" label="Username"/>
       <w-input v-model="password" :type="isPassword ? 'password' : 'text'"
                 :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
                 @click:inner-icon-left="isPassword = !isPassword" class="mb5" label="Password"/>
     </w-card>
-    <w-button @click="testLog" class="ma1" bg-color="primary" round>Console log</w-button>
-    <w-button @click="login" class="ma1" bg-color="primary" round>Login</w-button>
+    <w-button @click="login" class="ma1" bg-color="primary" round shadow lg>Login</w-button>
+    <w-alert v-if="isError == true" error shadow round class="alert">Username or Password are incorrect.</w-alert>
+  </div>
   </div>
 </template>
 
@@ -22,12 +28,11 @@ export default {
     return({
       username:'',
       password:'',
-      isPassword: true
-    })
+      isPassword: true,
+      isError:false,
+     })
   },methods: {
-    testLog: function(){
-    console.log(this.username, " ", this.password)
-  }, login: function(){
+    login: function(){
     let credentials = {username:this.username,password:this.password}
     axios.post('https://dont-let-it-die.herokuapp.com/auth/login',credentials)
     .then(res => {
@@ -36,7 +41,7 @@ export default {
       this.password = ''
       this.$router.push('/dashboard')
     }).catch(err => {
-      console.error(err)
+      this.isError = true
     })
   }}
 }
@@ -44,22 +49,27 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.container{
+  margin-top: 15%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.title{
+  margin: 1% 0 1% 0;;
 }
 .card{
-  width: 80%;
-  margin-left: 10%;
+  width: 50%;
+  margin-left: 25%;
+}
+.alert{
+  width: 50%;
+  margin-left: 25%;
+}
+img{
+  width: 100%;
+  position: fixed;
+  left: 0%;
+  z-index: -1;
 }
 </style>
