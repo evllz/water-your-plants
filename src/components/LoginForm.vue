@@ -13,6 +13,7 @@
     </w-card>
     <w-button @click="login" class="ma1" bg-color="primary" round shadow lg>Login</w-button>
     <w-alert v-if="isError == true" error shadow round class="alert">Username or Password are incorrect.</w-alert>
+
   </div>
   </div>
 </template>
@@ -21,9 +22,6 @@
 import axios from 'axios'
 export default {
   name: 'LoginForm',
-  props: {
-    msg: String
-  },
   data(){
     return({
       username:'',
@@ -47,7 +45,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container{
   margin-top: 15%;
