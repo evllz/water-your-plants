@@ -13,7 +13,7 @@ export default {
         }, 
     },
     created(){
-        console.log('created')
+        console.log(this.$store.state)
     },
     beforeRouteEnter(routeTo, routeFrom, next){
         let token = localStorage.getItem('token')
