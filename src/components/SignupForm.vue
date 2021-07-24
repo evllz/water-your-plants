@@ -24,7 +24,7 @@ export default {
             phone: '',
             valid: false,
             validators: {required: value => !!value || "This field is required"},
-            
+            loading: false,
         })
     },
     methods:{

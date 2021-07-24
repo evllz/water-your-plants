@@ -23,7 +23,7 @@ export default {
       password:'',
       isPassword: true,
       isError:false,
-      loading: false
+      loading: false,
      })
   },methods: {
     login: function(){
@@ -41,7 +41,7 @@ export default {
       this.loading = !this.loading
       this.isError = true
     })
-    }
+   }
   }
 }
 </script>
