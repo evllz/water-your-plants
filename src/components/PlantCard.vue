@@ -1,28 +1,23 @@
 <template>
-  <w-card v-for='plant in plants' :key="plant.id" class="card" :image="'../assets/cactus.png'" shadow>
-          <p>Name: {{plant.nickname}}</p>
-          <p>Species: {{plant.species}}</p>
-          <p>H2O Frequency: {{plant.h2ofrequency}}</p>
-          <p>Last Wareted: {{plant.isWatered}}</p>
+  <w-card :title="plant.nickname" shadow>
+    <img v-if="!plant.image_url" src="../assets/cactus.png" />
+    <img v-if="plant.image_url" src="plant.image_url" />
+    <p>Species: {{ plant.species }}</p>
+    <p>H2O Frequency: {{ plant.h2oFrequency }} days</p>
+    <p>Last Wareted: {{ new Date(plant.isWatered).toDateString() }}</p>
   </w-card>
 </template>
 
 <script>
 export default {
-    name:'PlanCard',
-    props: ['plants'],
-    data(){
-        return({
-            // cactus: 
-        })
-    }
-}
+  name: "PlanCard",
+  props: ["plant"]
+};
 </script>
 
-<style>
-.card{
-    width: 25%;
-    margin: 1%;
+<style scoped>
+img {
+  max-height: 100%;
+  max-width: 100%;
 }
-
 </style>

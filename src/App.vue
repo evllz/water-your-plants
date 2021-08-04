@@ -1,16 +1,14 @@
 <template>
-<w-app>
-  <!-- <div id="nav">
-    <router-link to="/">Home </router-link> 
+  <w-app>
+    <!-- <div id="nav">
+    <router-link to="/">Home </router-link>
     <router-link to="/about">| About</router-link>
     <router-link v-if="token" to="/dashboard">| Dashboard</router-link>
   </div> -->
-  <router-view/>
-</w-app>
+    <router-view />
+  </w-app>
 </template>
-<script>
-
-</script>
+<script></script>
 
 <style>
 #app {
@@ -20,5 +18,4 @@
   text-align: center;
   color: #2c3e50;
 }
-
 </style>

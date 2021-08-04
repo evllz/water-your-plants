@@ -5,7 +5,7 @@ export default createStore({
   state: {
     user_id: "",
     username: "",
-    plants: [],
+    plants: []
   },
   mutations: {
     SET_USER(state, status) {
@@ -13,7 +13,7 @@ export default createStore({
     },
     SET_PLANTS(state, status) {
       state.plants = status;
-    },
+    }
   },
   actions: {
     fetchData() {
@@ -21,14 +21,14 @@ export default createStore({
         .get(
           `https://dont-let-it-die.herokuapp.com/plants/user/${this.state.user_id}`
         )
-        .then((res) => {
+        .then(res => {
           this.commit("SET_PLANTS", res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   modules: {},
-  plugins: [createPersistState()],
+  plugins: [createPersistState()]
 });
