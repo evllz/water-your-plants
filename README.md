@@ -1,5 +1,11 @@
 # water-your-plants
 
+## DEMO URL
+
+```
+https://water-your-plants-three.vercel.app/dashboard
+```
+
 ## Project setup
 ```
 npm install
