@@ -60,6 +60,7 @@ export default {
       h2oFrequency: "",
       IsWatered: ref(new Date()),
       user_id: this.$store.state.user_id,
+      valid: false,
       validators: { required: value => !!value || "This field is required" },
       loading: false
     };
@@ -74,15 +75,23 @@ export default {
     },
     savePlant: function() {
       this.loading = !this.loading;
-      axiosWithAuth()
-        .post("https://dont-let-it-die.herokuapp.com/plants/", {
-          nickname: this.nickname,
-          species: this.species,
-          h2oFrequency: this.h2oFrequency,
-          user_id: this.user_id,
-          Image_url: null,
-          IsWatered: this.IsWatered
-        })
+      axios
+        .post(
+          "https://dont-let-it-die.herokuapp.com/plants/",
+          {
+            nickname: this.nickname,
+            species: this.species,
+            h2oFrequency: this.h2oFrequency,
+            user_id: this.user_id,
+            Image_url: null,
+            IsWatered: this.IsWatered
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          }
+        )
         .then(res => {
           console.log(res);
           this.loading = !this.loading;
@@ -90,7 +99,7 @@ export default {
           // this.$props.addPlant()
         })
         .catch(err => {
-          console.log({ messege: err.error });
+          console.log({ messege: err });
           this.loading = !this.loading;
         });
     }

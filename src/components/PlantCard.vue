@@ -1,5 +1,10 @@
 <template>
-  <w-card :title="plant.nickname" shadow>
+  <w-card shadow inner-icon-left="md pencil">
+    <w-toolbar>
+      <div class="title2">{{plant.nickname}}</div>
+      <div class="spacer"></div>
+      <w-button class="ma1" bg-color="success" shadow><w-icon> {{editIcon}} </w-icon></w-button>
+    </w-toolbar>
     <img v-if="!plant.image_url" src="../assets/cactus.png" />
     <img v-if="plant.image_url" src="plant.image_url" />
     <p>Species: {{ plant.species }}</p>
@@ -11,7 +16,18 @@
 <script>
 export default {
   name: "PlanCard",
-  props: ["plant"]
+  props: ["plant"],
+  data(){
+    return({
+        editIcon: 'mdi mdi-pencil'
+    })
+  },
+  methods:{
+    press:function() {
+      console.log(this.editIcon)
+      this.editIcon = 'mdi mdi-pencil-outline'
+    }
+  }
 };
 </script>
 

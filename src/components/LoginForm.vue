@@ -12,6 +12,7 @@
         :type="isPassword ? 'password' : 'text'"
         :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
         @click:inner-icon-left="isPassword = !isPassword"
+        @keyup.enter="login"
         class="mb5"
         label="Password"
       />

@@ -4,10 +4,10 @@
       <h1>My Plants</h1>
     </w-flex>
     <w-flex justify-end>
-      <w-button @click="addPlant" class="ma1 button" bg-color="primary" round
+      <w-button @click="addPlant" class="ma1 button" bg-color="primary" round shadow
         >Add Plant</w-button
       >
-      <w-button @click="logout" class="ma1 button" bg-color="primary" round
+      <w-button @click="logout" class="ma1 button" bg-color="primary" round shadow
         >Logout</w-button
       >
     </w-flex>
