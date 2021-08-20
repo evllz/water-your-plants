@@ -1,42 +1,43 @@
 <template>
   <w-card shadow class="card" bg-color="white">
-    <!-- <button @click="test">test</button> -->
+    <button @click="test">test</button>
     <w-form v-model="valid">
       <w-input
-        v-model="nickname"
+        v-model="plant.nickname"
         class="mb4"
         label="Nickname"
         :validators="[validators.required]"
       ></w-input>
       <w-input
-        v-model="species"
+        v-model="plant.species"
         class="mb4"
         label="Species"
         :validators="[validators.required]"
       ></w-input>
       <w-input
-        v-model="h2oFrequency"
+        v-model="plant.h2oFrequency"
         class="mb4"
         label="H2O Frequency (Days)"
         :validators="[validators.required]"
       ></w-input>
       <div class="datepicker">
         <label for="datepicker">Last watered?</label>
-        <datepicker v-model="IsWatered" />
+        <datepicker v-model="plant.IsWatered" />
       </div>
       <w-button
         v-if="!loading"
-        @click="savePlant"
-        class="my1 mr2 button"
-        :disabled="valid === false"
-        >Save</w-button
-      >
-      <w-button
-        v-if="!loading"
         class="my1 button"
-        bg-color="none"
-        @click="addPlant"
-        >Cancel</w-button
+        bg-color="primary"
+        @click="toggleEdit"
+        >Close</w-button
+      ><br />
+      <w-button
+        shadow
+        class="ma1"
+        bg-color="error"
+        icon="mdi mdi-delete"
+        @click="deletePlant"
+        >Delete</w-button
       >
       <w-spinner v-if="loading" />
     </w-form>
@@ -46,42 +47,31 @@
 <script>
 import Datepicker from "vue3-datepicker";
 import { ref } from "vue";
-// import { axiosWithAuth } from "@/services/axiosWithAuth.js";
-// import axios from "axios";
 export default {
-  name: "NewPlantForm",
+  name: "EditPlantForm",
   components: {
     Datepicker,
   },
   data() {
     return {
-      nickname: "",
-      species: "",
-      h2oFrequency: "",
-      IsWatered: ref(new Date()),
-      user_id: this.$store.state.user_id,
       valid: false,
       validators: { required: (value) => !!value || "This field is required" },
       loading: false,
     };
   },
   props: {
-    showCard: { type: Boolean },
-    addPlant: { type: Function },
+    editCard: { type: Boolean },
+    toggleEdit: { type: Function },
+    plant: { type: Object },
   },
   methods: {
     test: function () {
       console.log(this.$props);
     },
-    savePlant: function () {
-      let plant = {
-        nickname: this.nickname,
-        species: this.species,
-        h2oFrequency: this.h2oFrequency,
-        IsWatered: this.IsWatered.toDateString(),
-      };
-      this.$store.commit("ADD_PLANT", plant);
-      this.addPlant();
+    deletePlant: function () {
+      //   console.log(this.$props.plant.id);
+      this.$store.commit("DELETE_PLANT", this.$props.plant.id);
+      this.toggleEdit();
     },
   },
 };

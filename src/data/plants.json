@@ -1,0 +1,100 @@
+[
+    {
+        "title": "DATA PER USER",
+        "values": [
+            [
+                1,
+                "ivy",
+                "succulent",
+                4,
+                1,
+                null,
+                "2021-03-07"
+            ],
+            [
+                5,
+                "birds of paradise",
+                "tropical",
+                1,
+                1,
+                null,
+                "2021-03-07"
+            ],
+            [
+                3,
+                "Chocolate Soldier",
+                "tropical",
+                1,
+                1,
+                null,
+                "2021-03-08"
+            ],
+            [
+                10,
+                "This is a cactus",
+                "cactus",
+                7,
+                1,
+                null,
+                "2021-03-07"
+            ],
+            [
+                45,
+                "This is a succulent",
+                "succulent",
+                4,
+                1,
+                null,
+                "2021-03-07"
+            ],
+            [
+                2,
+                "plant-test",
+                "tropical",
+                3,
+                1,
+                null,
+                "2021-03-08"
+            ],
+            [
+                6,
+                "This is a not cactus",
+                "air",
+                1,
+                1,
+                null,
+                "2021-03-08"
+            ]
+        ],
+        "fields": [
+            "id",
+            "nickname",
+            "species",
+            "h2oFrequency",
+            "user_id",
+            "image_url",
+            "isWatered"
+        ],
+        "types": [
+            23,
+            1043,
+            1043,
+            23,
+            23,
+            25,
+            1082
+        ],
+        "type_names": [
+            "integer",
+            "text",
+            "text",
+            "integer",
+            "integer",
+            "text",
+            "date"
+        ],
+        "started_at": "2021-08-19 23:46:54 +0000",
+        "finished_at": "2021-08-19 23:46:54 +0000",
+        "checksum": "e748d944e0e88dd379c6c513098c535d"
+    }
+]

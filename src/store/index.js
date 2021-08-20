@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import { axiosWithAuth } from "@/services/axiosWithAuth.js";
 import createPersistState from "vuex-persistedstate";
+import data from '../data/plants.json'
 export default createStore({
   state: {
     user_id: "",
@@ -13,6 +14,17 @@ export default createStore({
     },
     SET_PLANTS(state, status) {
       state.plants = status;
+    },
+    ADD_PLANT(state, status) {
+      state.plants = [...state.plants, status]
+    },
+    DELETE_PLANT(state, status) {
+      let newPlants = state.plants.filter(plant => {
+        if (plant.id != status) {
+          return plant
+        }
+      })
+      state.plants = newPlants
     }
   },
   actions: {
@@ -25,7 +37,7 @@ export default createStore({
           this.commit("SET_PLANTS", res.data);
         })
         .catch(err => {
-          console.log(err);
+          this.commit("SET_PLANTS", data.values);
         });
     }
   },

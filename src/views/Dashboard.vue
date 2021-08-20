@@ -4,23 +4,35 @@
       <h1>My Plants</h1>
     </w-flex>
     <w-flex justify-end>
-      <w-button @click="addPlant" class="ma1 button" bg-color="primary" round shadow
+      <w-button
+        @click="addPlant"
+        class="ma1 button"
+        bg-color="success"
+        round
+        shadow
         >Add Plant</w-button
       >
-      <w-button @click="logout" class="ma1 button" bg-color="primary" round shadow
+      <w-button
+        @click="logout"
+        class="ma1 button"
+        bg-color="success"
+        round
+        shadow
         >Logout</w-button
       >
     </w-flex>
   </header>
   <new-plant-form v-if="showCard" :addPlant="addPlant" />
   <!-- <button @click="test">test</button> -->
-  <div class="cardContainer">
+  <div v-if="plants" class="cardContainer">
     <div v-for="plant in plants" :key="plant.id" class="card">
       <plant-card :plant="plant" />
     </div>
   </div>
 
-  <!-- <w-button @click="testing" class="ma1" bg-color="primary" round>Console</w-button> -->
+  <!-- <w-button @click="test" class="ma1" bg-color="primary" round
+    >Console</w-button
+  > -->
 </template>
 
 <script>
@@ -32,33 +44,33 @@ export default {
   name: "Dashboard",
   components: {
     PlantCard,
-    NewPlantForm
+    NewPlantForm,
   },
   data() {
     return {
-      showCard: false
+      showCard: false,
     };
   },
   computed: {
     ...mapState({
-      plants: state => state.plants
-    })
+      plants: (state) => state.plants,
+    }),
   },
   methods: {
-    logout: function() {
+    logout: function () {
       localStorage.removeItem("token");
       this.$router.push("/");
     },
-    addPlant: function() {
+    addPlant: function () {
       if (this.showCard) {
         this.showCard = !this.showCard;
       } else {
         this.showCard = !this.showCard;
       }
     },
-    test: function() {
-      console.log(this.showCard);
-    }
+    test: function () {
+      console.log(this.plants);
+    },
   },
   beforeRouteEnter(routeTo, routeFrom, next) {
     let token = localStorage.getItem("token");
@@ -70,7 +82,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchData");
-  }
+  },
 };
 </script>
 
